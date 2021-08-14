@@ -39,3 +39,13 @@ mysql> describe payroll_service;
 | start  | date         | NO   |     | NULL    |                |
 +--------+--------------+------+-----+---------+----------------+
 4 rows in set (0.26 sec)
+-------------------------------------------------
+//UC3
+Inserting Data Into Table
+-------------------------------------------------
+mysql> insert into payroll_service ( name,salary,start) Values
+    ->   ('Bill',100000.0, '2018-01-02'),
+    ->   ('Gopi',450000.0,'2019-12-09'),
+    ->   ('Govardhan',30000.0,'2020-05-06');
+Query OK, 3 rows affected (0.29 sec)
+Records: 3  Duplicates: 0  Warnings:
