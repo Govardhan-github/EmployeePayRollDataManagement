@@ -91,4 +91,77 @@ mysql> select * from payroll_service
 +----+-----------+--------+------------+
 |  3 | Govardhan |  30000 | 2020-05-06 |
 +----+-----------+--------+------------+
-1 row in set (0.00 sec) 
+1 row in set (0.00 sec)
+---------------------------------------------
+//UC6
+Adding Gender To Employees
+---------------------------------------------
+mysql> alter table payroll_service add gender char(1) after name;
+Query OK, 0 rows affected (3.51 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe payroll_Service;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(150) | NO   |     | NULL    |                |
+| gender | char(1)      | YES  |     | NULL    |                |
+| salary | double       | NO   |     | NULL    |                |
+| start  | date         | NO   |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+5 rows in set (1.46 sec)
+
+mysql> update payroll_service set gender = 'M' where name = 'Gopi';
+Query OK, 1 row affected (0.21 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> describe payroll_Service;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(150) | NO   |     | NULL    |                |
+| gender | char(1)      | YES  |     | NULL    |                |
+| salary | double       | NO   |     | NULL    |                |
+| start  | date         | NO   |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from payroll_Service;
++----+-----------+--------+--------+------------+
+| id | name      | gender | salary | start      |
++----+-----------+--------+--------+------------+
+|  1 | Bill      | NULL   | 100000 | 2018-01-02 |
+|  2 | Gopi      | M      | 450000 | 2019-12-09 |
+|  3 | Govardhan | NULL   |  30000 | 2020-05-06 |
++----+-----------+--------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update payroll_service set gender = 'M' where name = 'Govardhan' or name = 'Bill';
+Query OK, 2 rows affected (0.18 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from payroll_Service;
++----+-----------+--------+--------+------------+
+| id | name      | gender | salary | start      |
++----+-----------+--------+--------+------------+
+|  1 | Bill      | M      | 100000 | 2018-01-02 |
+|  2 | Gopi      | M      | 450000 | 2019-12-09 |
+|  3 | Govardhan | M      |  30000 | 2020-05-06 |
++----+-----------+--------+--------+------------+
+3 rows in set (0.11 sec)
+
+mysql> update payroll_service set salary = 354000.0 where name = 'Bill';
+Query OK, 1 row affected (0.19 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from payroll_Service;
++----+-----------+--------+--------+------------+
+| id | name      | gender | salary | start      |
++----+-----------+--------+--------+------------+
+|  1 | Bill      | M      | 354000 | 2018-01-02 |
+|  2 | Gopi      | M      | 450000 | 2019-12-09 |
+|  3 | Govardhan | M      |  30000 | 2020-05-06 |
++----+-----------+--------+--------+------------+
+3 rows in set (0.00 sec) 
