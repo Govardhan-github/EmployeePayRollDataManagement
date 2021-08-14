@@ -1,1 +1,17 @@
 Welcome To Employee Pay Roll Data Management
+----------------------------------------
+//UC1
+Creating Pay Roll Service DataBase
+-----------------------------------------
+create database payroll_service;
+Query OK, 1 row affected (0.21 sec)
+
+mysql> use payroll_service;
+Database changed
+mysql> select database();
++-----------------+
+| database()      |
++-----------------+
+| payroll_service |
++-----------------+
+1 row in set (0.00 sec)
