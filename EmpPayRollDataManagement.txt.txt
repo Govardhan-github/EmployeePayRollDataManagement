@@ -214,4 +214,37 @@ mysql> select gender , sum(salary) from  payroll_service GROUP by gender;
 | M      |      834000 |
 +--------+-------------+
 1 row in set (0.00 sec)
- 
+----------------------------------------
+//UC8
+---------------------------------------
+mysql> alter table payroll_service add phone_number VARCHAR(250) after name;
+Query OK, 0 rows affected (4.28 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payroll_service add address VARCHAR(250) after phone_number;
+Query OK, 0 rows affected (1.71 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payroll_service add department VARCHAR(250) after address;
+Query OK, 0 rows affected (1.88 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payroll_service alter address set default 'TBD';
+Query OK, 0 rows affected (0.36 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe payroll_service;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name         | varchar(150) | NO   |     | NULL    |                |
+| phone_number | varchar(250) | YES  |     | NULL    |                |
+| address      | varchar(250) | YES  |     | TBD     |                |
+| department   | varchar(250) | YES  |     | NULL    |                |
+| gender       | char(1)      | YES  |     | NULL    |                |
+| salary       | double       | NO   |     | NULL    |                |
+| start        | date         | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+8 rows in set (0.13 sec)
+---------------------------------
