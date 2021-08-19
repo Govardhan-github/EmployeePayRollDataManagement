@@ -248,3 +248,53 @@ mysql> describe payroll_service;
 +--------------+--------------+------+-----+---------+----------------+
 8 rows in set (0.13 sec)
 ---------------------------------
+//UC9
+------------------------------------
+mysql> alter table payroll_service rename column salary to basic_pay;
+Query OK, 0 rows affected (0.28 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payroll_service add deductions double NOT NULL after basic_pay;
+Query OK, 0 rows affected (2.29 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payroll_service add taxable_pay  double NOT NULL after deductions;
+Query OK, 0 rows affected (1.74 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payroll_service add tax double NOT NULL after taxable_pay;
+Query OK, 0 rows affected (1.52 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table payroll_service add net_pay double NOT NULL after tax;
+Query OK, 0 rows affected (2.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe payroll_service;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name         | varchar(150) | NO   |     | NULL    |                |
+| phone_number | varchar(250) | YES  |     | NULL    |                |
+| address      | varchar(250) | YES  |     | TBD     |                |
+| department   | varchar(250) | YES  |     | NULL    |                |
+| gender       | char(1)      | YES  |     | NULL    |                |
+| basic_pay    | double       | NO   |     | NULL    |                |
+| deductions   | double       | NO   |     | NULL    |                |
+| taxable_pay  | double       | NO   |     | NULL    |                |
+| tax          | double       | NO   |     | NULL    |                |
+| net_pay      | double       | NO   |     | NULL    |                |
+| start        | date         | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+12 rows in set (0.18 sec)
+
+mysql> select * from payroll_service;
++----+-----------+--------------+---------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+| id | name      | phone_number | address | department | gender | basic_pay | deductions | taxable_pay | tax | net_pay | start      |
++----+-----------+--------------+---------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+|  1 | Bill      | NULL         | NULL    | NULL       | M      |    354000 |          0 |           0 |   0 |       0 | 2018-01-02 |
+|  2 | Gopi      | NULL         | NULL    | NULL       | M      |    450000 |          0 |           0 |   0 |       0 | 2019-12-09 |
+|  3 | Govardhan | NULL         | NULL    | NULL       | M      |     30000 |          0 |           0 |   0 |       0 | 2020-05-06 |
++----+-----------+--------------+---------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+3 rows in set (0.00 sec)
