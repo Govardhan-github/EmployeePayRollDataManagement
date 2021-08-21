@@ -315,3 +315,65 @@ mysql> select * from payroll_service where name ='Gopi';
 |  7 | Gopi | NULL         | TBD     | Marketing  | M      |   3000000 |    1000000 |     2000000 | 60000 | 1500000 | 2018-01-03 |
 +----+------+--------------+---------+------------+--------+-----------+------------+-------------+-------+---------+------------+
 3 rows in set (0.00 sec)
+----------------------------------------------
+//UC11
+---------------------------------------------
+mysql> create table Department (department varchar(250)NOT NULL,primary key (department));
+Query OK, 0 rows affected (2.13 sec)
+
+mysql>  insert into Department (department) values( 'sales'),('Marketing');
+Query OK, 2 rows affected (0.27 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from department;
++------------+
+| department |
++------------+
+| Marketing  |
+| sales      |
++------------+
+2 rows in set (0.00 sec)
+
+mysql> create table Employee (id int, Phone_number BIGINT(15), address VARCHAR(25), gender char(1), primary key (id));
+Query OK, 0 rows affected, 1 warning (1.01 sec)
+
+mysql> insert into Employee (id, Phone_number, Address, gender) values
+    -> (1,9666110767,'Hyderabad','M'),
+    ->  (2,8945647589,'Mumbai','M');
+Query OK, 2 rows affected (0.26 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from Employee;
++----+--------------+-----------+--------+
+| id | Phone_number | address   | gender |
++----+--------------+-----------+--------+
+|  1 |   9666110767 | Hyderabad | M      |
+|  2 |   8945647589 | Mumbai    | M      |
++----+--------------+-----------+--------+
+2 rows in set (0.11 sec)
+
+mysql>  create table Emp_Department (empID int, Depart varchar(250) NOT NULL, FOREIGN KEY (empID) REFERENCES Employee (id),
+    -> FOREIGN KEY (Depart) REFERENCES Department (department), PRIMARY KEY (empID, Depart));
+Query OK, 0 rows affected (1.91 sec)
+
+mysql> describe Emp_Department;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| empID  | int          | NO   | PRI | NULL    |       |
+| Depart | varchar(250) | NO   | PRI | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+2 rows in set (0.29 sec)
+mysql> insert into Emp_Department (empID, Depart) VALUES (1, 'Marketing');
+Query OK, 1 row affected (0.22 sec)
+
+mysql> select * from Emp_Department;
++-------+-----------+
+| empID | Depart    |
++-------+-----------+
+|     1 | Marketing |
+|     2 | Marketing |
+|     2 | Sales     |
++-------+-----------+
+3 rows in set (0.00 sec)
+
