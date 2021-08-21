@@ -377,3 +377,21 @@ mysql> select * from Emp_Department;
 +-------+-----------+
 3 rows in set (0.00 sec)
 
+---------------------------------
+//UC12
+----------------------------------
+mysql> select * from Emp_Department where empId = 1;
++-------+-----------+
+| empID | Depart    |
++-------+-----------+
+|     1 | Marketing |
++-------+-----------+
+1 row in set (0.82 sec)
+
+mysql> select * from Department where department = 'Sales';
++------------+
+| department |
++------------+
+| sales      |
++------------+
+1 row in set (0.12 sec)
